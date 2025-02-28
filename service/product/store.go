@@ -20,7 +20,7 @@ func (s *Store) GetProducts() ([]types.Product, error) {
 		return nil, err
 	}
 
-  products :=make([]types.Product, 0)
+	products := make([]types.Product, 0)
 	for rows.Next() {
 		p, err := scanRowIntoProduct(rows)
 		if err != nil {
@@ -31,6 +31,21 @@ func (s *Store) GetProducts() ([]types.Product, error) {
 	}
 
 	return products, nil
+}
+
+func (s *Store) CreateProduct(product types.Product) error {
+	_, err := s.db.Query("INSERT INTO products (name,description,image,price,quantity) VALUES (?,?,?,?,?)",
+		product.Name,
+		product.Description,
+		product.Image,
+		product.Price,
+		product.Quantity)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func scanRowIntoProduct(rows *sql.Rows) (*types.Product, error) {

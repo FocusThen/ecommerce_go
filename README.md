@@ -2,4 +2,4 @@
 # TODOS
 
 ## Products
-- [ ] Make Create Method
+- [x] Make Create Method
