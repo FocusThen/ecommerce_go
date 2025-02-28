@@ -49,14 +49,14 @@ func (h *Handler) createOrder(ps []types.Product, items []types.CartItem, userID
 		return 0, 0, err
 	}
 
-  for _, item := range items{
-    h.store.CreateOrderItem(types.OrderItem{
-      OrderID: orderID,
-      ProductID: item.ProductID,
-      Quantity: item.Quantity,
-      Price: productMap[item.ProductID].Price,
-    })
-  }
+	for _, item := range items {
+		h.store.CreateOrderItem(types.OrderItem{
+			OrderID:   orderID,
+			ProductID: item.ProductID,
+			Quantity:  item.Quantity,
+			Price:     productMap[item.ProductID].Price,
+		})
+	}
 
 	return orderID, totalPrice, nil
 }
